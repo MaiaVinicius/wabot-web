@@ -16,7 +16,7 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons text-primary">info</i>
-                            <a href="#pablo">Ver todas...</a>
+                            <a href="{{route("queue")}}">Ver todas...</a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">date_range</i> Últimas {{$quantitySentInterval}} horas
-                            &nbsp;<strong>({{$quantitySent24hours}})</strong>
+                            &nbsp;<a href="{{route("sent")}}"><strong>({{$quantitySent24hours}})</strong></a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">update</i> Percentual de clientes que respondem
+                            <i class="material-icons">update</i> Últimas {{$quantitySentInterval}} horas &nbsp;<a
+                                    href="{{route("reply")}}"><strong>({{$quantityRespond}})</strong></a>
                         </div>
                     </div>
                 </div>
@@ -195,7 +196,7 @@
                                 <tr>
                                     <td><strong>{{$sentMessage["projectName"]}}</strong></td>
                                     <td>{{$sentMessage["datetime"]}}</td>
-                                    <td>{{$sentMessage["phone"]}}</td>
+                                    <td><a href="{{route("interaction")."?phone={$sentMessage["phone"]}"}}">{{$sentMessage["phone"]}}</a></td>
                                     <td>{{substr($sentMessage["message"], 0, 16) . "..."}}</td>
                                 </tr>
                             @endforeach

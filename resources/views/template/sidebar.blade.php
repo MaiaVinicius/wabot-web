@@ -24,16 +24,22 @@
                     <p>Início</p>
                 </a>
             </li>
+            <li class="nav-item {{ Request::is("queue") ? "active" : "" }} ">
+                <a class="nav-link" href="{{route("queue")}}">
+                    <i class="material-icons">playlist_play</i>
+                    <p>Fila de envio</p>
+                </a>
+            </li>
             <li class="nav-item {{ Request::is("sent") ? "active" : "" }} ">
                 <a class="nav-link" href="{{route("sent")}}">
                     <i class="material-icons">message</i>
-                    <p>Envios</p>
+                    <p>Mensagens enviadas</p>
                 </a>
             </li>
             <li class="nav-item {{ Request::is("reply") ? "active" : "" }} ">
                 <a class="nav-link" href="{{route("reply")}}">
                     <i class="material-icons">reply</i>
-                    <p>Respostas</p>
+                    <p>Respostas recebidas</p>
                 </a>
             </li>
             <li class="nav-item" style="display:none;">

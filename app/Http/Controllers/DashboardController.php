@@ -19,6 +19,8 @@ class DashboardController extends Controller
 
         $quantitySentInterval = 96;
 
+        $responses = $responseModel->getQuantityRespond($quantitySentInterval);
+
         $sent = $sentModel->getQuantitySent($quantitySentInterval);
 
         $quantitySent24hours = $sent["quantity"];
@@ -35,6 +37,7 @@ class DashboardController extends Controller
             "quantitySent24hours" => $quantitySent24hours,
             "amountProfit" => $sent["amount"],
             "quantitySentInterval" => $quantitySentInterval,
+            "quantityRespond" => $responses,
             "lastSent" => $lastSent,
             "projects" => $projects,
             "peopleThatRespond" => $peopleThatRespond,
@@ -52,6 +55,7 @@ class DashboardController extends Controller
             "lastSent" => $lastSent,
         ]);
     }
+
     public function logs(LogsModel $logsModel)
     {
         $dateStart = date("Y-m-d");
@@ -61,6 +65,17 @@ class DashboardController extends Controller
 
         return view("logs", [
             "logs" => $logs,
+        ]);
+    }
+
+    public function queue(QueueModel $queueModel)
+    {
+        $dateStart = date("Y-m-d");
+
+        $logs = $queueModel->getQueue($dateStart);
+
+        return view("queue", [
+            "queue" => $logs,
         ]);
     }
 
@@ -85,6 +100,18 @@ class DashboardController extends Controller
 
                 return null;
             }
+        ]);
+    }
+
+        public function listInteractions(ResponseModel $responseModel, Request $request)
+    {
+        $phone = $request->input("phone");
+
+        $messages = $responseModel->getPhoneMessages($phone);
+
+        return view("interaction", [
+            "messages" => $messages,
+            "phone" => $phone
         ]);
     }
 }

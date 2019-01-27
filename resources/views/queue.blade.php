@@ -10,33 +10,32 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header card-header-warning">
-                        <h4 class="card-title">Últimos envios</h4>
-                        <p class="card-category">Mensagens disparadas recentemente</p>
+                        <h4 class="card-title">Fila de envio -  <strong>{{count($queue)}} mensagens</strong></h4>
+                        <p class="card-category">Mensagens aguardando a serem enviadas</p>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
                             <thead class="text-warning">
                             <tr>
                                 <th>Projeto</th>
-                                <th>Data e hora</th>
+                                <th>Data</th>
+                                <th>Hora</th>
                                 <th>Número</th>
                                 <th>Mensagem</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($lastSent as $sentMessage)
+                            @foreach($queue as $mesage)
                                 <tr>
-                                    <td><strong>{{$sentMessage["projectName"]}}</strong></td>
-                                    <td>{{$sentMessage["datetime"]}}</td>
-                                    <td><a href="{{route("interaction")."?phone={$sentMessage["phone"]}"}}">{{$sentMessage["phone"]}}</a></td>
-                                    <td><small>{{$sentMessage["message"]}}</small></td>
+                                    <td><strong>{{$mesage["projectName"]}}</strong></td>
+                                    <td>{{$mesage["send_date"]}}</td>
+                                    <td>{{$mesage["send_time"]}}</td>
+                                    <td><a href="{{route("interaction")."?phone={$mesage["phone"]}"}}">{{$mesage["phone"]}}</a></td>
+                                    <td><small>{{$mesage["message"]}}</small></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        <div class="stats float-right">
-                            <a href="#pablo">Ver todas</a>
-                        </div>
                     </div>
                 </div>
             </div>

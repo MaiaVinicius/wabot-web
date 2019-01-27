@@ -29,7 +29,7 @@
                                 <tr>
                                     <td><strong>{{$reply["projectName"]}}</strong></td>
                                     <td>{{$reply["datetime"]}}</td>
-                                    <td>{{$reply["phone"]}}</td>
+                                    <td><a href="{{route("interaction")."?phone={$reply["phone"]}"}}">{{$reply["phone"]}}</a></td>
                                     <td>{{$formatDelay($reply["delayTime"])}}</td>
                                     <td><small>{{$reply["message"]}}</small></td>
                                 </tr>

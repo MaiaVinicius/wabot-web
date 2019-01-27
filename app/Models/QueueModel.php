@@ -23,4 +23,14 @@ class QueueModel extends BaseModel
         $res = $this->raw("SELECT count(id) Qtd FROM wabot_queue WHERE active=1 {$sqlToday}");
         return $this->rawAsArray($res, true)["Qtd"];
     }
+
+    public function getQueue($date)
+    {
+        $res = $this->raw("SELECT q.* , proj.label projectName
+FROM wabot_queue q 
+INNER JOIN wabot_project proj ON proj.license_id=q.license_id 
+WHERE q.send_date=?", [$date]);
+
+        return $this->rawAsArray($res);
+    }
 }
