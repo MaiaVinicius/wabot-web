@@ -22,6 +22,7 @@
                                 <th>Número</th>
                                 <th>Tempo para resposta</th>
                                 <th>Mensagem</th>
+                                <th>Sincronizado</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -32,6 +33,9 @@
                                     <td><a href="{{route("interaction")."?phone={$reply["phone"]}"}}">{{$reply["phone"]}}</a></td>
                                     <td>{{$formatDelay($reply["delayTime"])}}</td>
                                     <td><small>{{$reply["message"]}}</small></td>
+                                    <td>
+                                        <span title="Sincronizado em {{$reply["sync_at"]}}"><i class="material-icons {{$reply["sync"] === 1 ? "text-success" : "text-danger"}}">{{$reply["sync"] === 1 ? "cloud_done" : "cloud_off"}}</i></span>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

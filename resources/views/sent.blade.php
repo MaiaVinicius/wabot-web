@@ -34,9 +34,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <div class="stats float-right">
-                            <a href="#pablo">Ver todas</a>
-                        </div>
+
                     </div>
                 </div>
             </div>

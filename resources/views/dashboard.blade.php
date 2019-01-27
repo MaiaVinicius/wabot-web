@@ -203,7 +203,7 @@
                             </tbody>
                         </table>
                         <div class="stats float-right">
-                            <a href="#pablo">Ver todas</a>
+                            <a href="{{route("sent")}}">Ver todas</a>
                         </div>
                     </div>
                 </div>
