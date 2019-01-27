@@ -15,9 +15,11 @@ class DashboardController extends Controller
     public function index(QueueModel $queueModel, SentModel $sentModel, ResponseModel $responseModel, ProjectModel $projectModel)
     {
         $numberInQueue = $queueModel->getNumberInQueue();
-        $sentsToday = $sentModel->getQuantitySent(24, true);
 
-        $quantitySentInterval = 96;
+        $quantitySentInterval = 24;
+
+        $sentsToday = $sentModel->getQuantitySent($quantitySentInterval, true);
+
 
         $responses = $responseModel->getQuantityRespond($quantitySentInterval);
 

@@ -49,13 +49,13 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="./typography.html">
+                <a class="nav-link" href="#">
                     <i class="material-icons">widgets</i>
                     <p>Integrações</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="./user.html">
+                <a class="nav-link" href="#">
                     <i class="material-icons">settings</i>
                     <p>Configurações</p>
                 </a>
