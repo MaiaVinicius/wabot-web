@@ -11,7 +11,7 @@
                             <i class="material-icons">playlist_play</i>
                         </div>
                         <p class="card-category">Fila de envio</p>
-                        <h3 class="card-title">{{ $numberInQueue }}</h3>
+                        <h3 class="card-title">{{ $totalSentToday }}/{{$totalQueueToday}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -33,6 +33,7 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">date_range</i> Últimas {{$quantitySentInterval}} horas
+                            &nbsp;<strong>({{$quantitySent24hours}})</strong>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons text-danger">warning</i>
-                            <a href="#pablo">Ver logs</a>
+                            <a href="{{route("logs")}}">Ver logs</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
                             <i class="material-icons">reply</i>
                         </div>
                         <p class="card-category">Taxa de resposta</p>
-                        <h3 class="card-title">45%</h3>
+                        <h3 class="card-title">{{$avgRespond}}%</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -71,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display: none">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header card-header-primary">
@@ -136,6 +137,7 @@
                             <tr>
                                 <th></th>
                                 <th>Projeto</th>
+                                <th>Número</th>
                                 <th>Status</th>
                                 <th>Número de envios</th>
                                 <th>Ações</th>
@@ -148,7 +150,7 @@
                                         <div class="form-check">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" value=""
-                                                {{$project["active"] === 1 ? "checked" : ""}}
+                                                        {{$project["active"] === 1 ? "checked" : ""}}
                                                 >
                                                 <span class="form-check-sign">
                                     <span class="check"></span>
@@ -157,6 +159,7 @@
                                         </div>
                                     </td>
                                     <td>{{$project["label"]}}</td>
+                                    <td>{{$project["phone"]}}</td>
                                     <td>{{$project["statusName"]}}</td>
                                     <td>{{$project["numberSent"]}}</td>
                                     <td>

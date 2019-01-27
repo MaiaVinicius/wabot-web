@@ -15,7 +15,7 @@ class ProjectModel extends BaseModel
     public function getProjects($status = false)
     {
         $res = $this->raw("
-SELECT pj.*,ps.name statusName, (SELECT count(id) FROM wabot_sent WHERE sender_id=sen.id) numberSent 
+SELECT pj.*,ps.name statusName, sen.phone, (SELECT count(id) FROM wabot_sent WHERE sender_id=sen.id) numberSent 
 
 FROM wabot_project pj 
 INNER JOIN wabot_project_status ps ON ps.id=pj.status_id

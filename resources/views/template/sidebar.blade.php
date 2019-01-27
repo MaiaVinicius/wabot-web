@@ -18,16 +18,22 @@
         </div>
 
         <ul class="nav">
-            <li class="nav-item active  ">
-                <a class="nav-link" href="dashboard.blade.php">
+            <li class="nav-item {{ Request::is("/") ? "active" : "" }}  ">
+                <a class="nav-link" href="{{route("dashboard")}}">
                     <i class="material-icons">home</i>
                     <p>Início</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="./tables.html">
+            <li class="nav-item {{ Request::is("sent") ? "active" : "" }} ">
+                <a class="nav-link" href="{{route("sent")}}">
                     <i class="material-icons">message</i>
-                    <p>Mensagens</p>
+                    <p>Envios</p>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::is("reply") ? "active" : "" }} ">
+                <a class="nav-link" href="{{route("reply")}}">
+                    <i class="material-icons">reply</i>
+                    <p>Respostas</p>
                 </a>
             </li>
             <li class="nav-item" style="display:none;">

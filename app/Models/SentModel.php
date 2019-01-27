@@ -12,9 +12,16 @@ use App\Support\Model\BaseModel;
  */
 class SentModel extends BaseModel
 {
-    public function getQuantitySent($hoursInterval = 24)
+    public function getQuantitySent($hoursInterval = 24, $today = false)
     {
-        $res = $this->raw("SELECT count(id) Qtd, sum(price) amount FROM wabot_sent WHERE datetime >= date_sub(curdate(), INTERVAL ? HOUR)", [$hoursInterval]);
+        $sqlToday = "";
+
+        if ($today) {
+            $sqlToday = " AND date(datetime) = curdate()";
+            $hoursInterval = 24;
+        }
+
+        $res = $this->raw("SELECT count(id) Qtd, sum(price) amount FROM wabot_sent WHERE datetime >= date_sub(curdate(), INTERVAL ? HOUR) {$sqlToday}", [$hoursInterval]);
         $sent = $this->rawAsArray($res, true);
 
         return [

@@ -11,4 +11,7 @@
 |
 */
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', 'DashboardController@index')->name("dashboard");
+Route::get('/sent', 'DashboardController@sent')->name("sent");
+Route::get('/reply', 'DashboardController@reply')->name("reply");
+Route::get('/logs', 'DashboardController@logs')->name("logs");

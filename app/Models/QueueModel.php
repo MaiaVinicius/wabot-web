@@ -12,9 +12,15 @@ use App\Support\Model\BaseModel;
  */
 class QueueModel extends BaseModel
 {
-    public function getNumberInQueue()
+    public function getNumberInQueue($today = true)
     {
-        $res = $this->raw("SELECT count(id) Qtd FROM wabot_queue WHERE active=1");
+        $sqlToday = "";
+
+        if ($today) {
+            $sqlToday = " AND date(datetime) = curdate()";
+        }
+
+        $res = $this->raw("SELECT count(id) Qtd FROM wabot_queue WHERE active=1 {$sqlToday}");
         return $this->rawAsArray($res, true)["Qtd"];
     }
 }
