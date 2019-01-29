@@ -30,6 +30,7 @@ var cron = require('node-cron');
 
 
 run();
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/5 * * * *', () => {
     run()
+    // console.log("run")
 });
