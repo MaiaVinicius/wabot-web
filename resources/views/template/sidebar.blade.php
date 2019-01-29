@@ -13,7 +13,7 @@
 
         <div class="alert {{@$exec ? "alert-success" : "alert-danger"}} " style="margin: 15px; padding-bottom: 5px">
 
-            @if($exec)
+            @if(@$exec)
                 <i class="fa fa-stop float-left" style="color: white;padding-left: 15px"></i>
                 <p style="padding-left: 40px">Em execução</p>
             @else

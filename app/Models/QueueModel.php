@@ -17,7 +17,7 @@ class QueueModel extends BaseModel
         $sqlToday = "";
 
         if ($today) {
-            $sqlToday = " AND date(datetime) = curdate()";
+            $sqlToday = " AND send_date = curdate()";
         }
 
         $res = $this->raw("SELECT count(id) Qtd FROM wabot_queue WHERE active=1 {$sqlToday}");

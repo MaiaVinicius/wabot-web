@@ -20,9 +20,9 @@ class DashboardController extends Controller
     {
         $numberInQueue = $queueModel->getNumberInQueue();
 
-        $quantitySentInterval = 72;
+        $quantitySentInterval = 144;
 
-        $sentsToday = $sentModel->getQuantitySent($quantitySentInterval, true);
+        $sentsToday = $sentModel->getQuantitySent(24, true);
 
 
         $responses = $responseModel->getQuantityRespond($quantitySentInterval);
@@ -52,7 +52,7 @@ class DashboardController extends Controller
             "totalSentToday" => $sentsToday["quantity"],
             "totalQueueToday" => $sentsToday["quantity"] + $numberInQueue,
 
-            "lastErrors" => $logsModel->getRecentErrors(24),
+            "lastErrors" => $logsModel->getRecentErrors(3),
             "exec" => $this->isExecuting(),
         ]);
     }
