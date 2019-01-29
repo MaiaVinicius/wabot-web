@@ -12,7 +12,11 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     //
-    public function index(QueueModel $queueModel, SentModel $sentModel, ResponseModel $responseModel, ProjectModel $projectModel)
+    public function index(QueueModel $queueModel, SentModel $sentModel,
+                          ResponseModel $responseModel,
+                          ProjectModel $projectModel,
+                          LogsModel $logsModel
+    )
     {
         $numberInQueue = $queueModel->getNumberInQueue();
 
@@ -37,15 +41,17 @@ class DashboardController extends Controller
         return view("dashboard", [
             "numberInQueue" => $numberInQueue,
             "quantitySent24hours" => $quantitySent24hours,
-            "amountProfit" => $sent["amount"],
+            "amountProfit" => round($sent["amount"], 2),
             "quantitySentInterval" => $quantitySentInterval,
             "quantityRespond" => $responses,
             "lastSent" => $lastSent,
             "projects" => $projects,
             "peopleThatRespond" => $peopleThatRespond,
-            "avgRespond" => round($peopleThatRespond / $quantitySent24hours, 2) * 100,
+            "avgRespond" => round(($peopleThatRespond / $quantitySent24hours * 100), 2),
             "totalSentToday" => $sentsToday["quantity"],
             "totalQueueToday" => $sentsToday["quantity"] + $numberInQueue,
+
+            "lastErrors" => $logsModel->getRecentErrors(24),
         ]);
     }
 
@@ -60,7 +66,7 @@ class DashboardController extends Controller
 
     public function logs(LogsModel $logsModel)
     {
-        $dateStart = date("Y-m-d");
+        $dateStart = date("Y-m-d", strtotime("-1 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
 
         $logs = $logsModel->getLogs($dateStart, $dateEnd);
@@ -105,7 +111,7 @@ class DashboardController extends Controller
         ]);
     }
 
-        public function listInteractions(ResponseModel $responseModel, Request $request)
+    public function listInteractions(ResponseModel $responseModel, Request $request)
     {
         $phone = $request->input("phone");
 

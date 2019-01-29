@@ -17,6 +17,7 @@
                         <table class="table table-hover">
                             <thead class="text-info">
                             <tr>
+                                <th></th>
                                 <th>Projeto</th>
                                 <th>Data e hora</th>
                                 <th>Tipo</th>
@@ -26,10 +27,27 @@
                             <tbody>
                             @foreach($logs as $log)
                                 <tr>
+                                    <td>
+
+                                        @if($log["log_type_id"]===3)
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                            {{$log["verified"] === 1 ? "checked" : ""}}
+                                                    >
+                                                    <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                                </label>
+                                            </div>
+                                        @endif
+                                    </td>
                                     <td><strong>{{$log["projectName"]}}</strong></td>
                                     <td>{{$log["datetime"]}}</td>
-                                    <td>{{$log["type"]}}</td>
-                                    <td><small>{{$log["message"]}}</small></td>
+                                    <td><strong style="color:{{$log["color"]}}">{{$log["type"]}}</strong></td>
+                                    <td>
+                                        <small>{{$log["message"]}}</small>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

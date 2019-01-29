@@ -45,7 +45,7 @@
                             <i class="material-icons">error</i>
                         </div>
                         <p class="card-category">Erros recentes</p>
-                        <h3 class="card-title">2 erros</h3>
+                        <h3 class="card-title">{{$lastErrors ? "{$lastErrors} erro".($lastErrors>1 ? "s": "") : "Nenhum erro"}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -196,7 +196,9 @@
                                 <tr>
                                     <td><strong>{{$sentMessage["projectName"]}}</strong></td>
                                     <td>{{$sentMessage["datetime"]}}</td>
-                                    <td><a href="{{route("interaction")."?phone={$sentMessage["phone"]}"}}">{{$sentMessage["phone"]}}</a></td>
+                                    <td>
+                                        <a href="{{route("interaction")."?phone={$sentMessage["phone"]}"}}">{{$sentMessage["phone"]}}</a>
+                                    </td>
                                     <td>{{substr($sentMessage["message"], 0, 16) . "..."}}</td>
                                 </tr>
                             @endforeach
