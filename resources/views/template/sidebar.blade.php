@@ -11,10 +11,15 @@
     </div>
     <div class="sidebar-wrapper">
 
-        <div class="alert alert-success " style="margin: 15px; padding-bottom: 5px">
+        <div class="alert {{@$exec ? "alert-success" : "alert-danger"}} " style="margin: 15px; padding-bottom: 5px">
 
-                <i class="fa fa-play float-left" style="color: white;padding-left: 15px"></i>
+            @if($exec)
+                <i class="fa fa-stop float-left" style="color: white;padding-left: 15px"></i>
                 <p style="padding-left: 40px">Em execução</p>
+            @else
+                <i class="fa fa-play float-left" style="color: white;padding-left: 15px"></i>
+                <p style="padding-left: 40px">Parado</p>
+            @endif
         </div>
 
         <ul class="nav">

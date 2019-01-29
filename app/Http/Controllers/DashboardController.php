@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $numberInQueue = $queueModel->getNumberInQueue();
 
-        $quantitySentInterval = 24;
+        $quantitySentInterval = 72;
 
         $sentsToday = $sentModel->getQuantitySent($quantitySentInterval, true);
 
@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $sent = $sentModel->getQuantitySent($quantitySentInterval);
 
         $quantitySent24hours = $sent["quantity"];
+
 
         $lastResponses = $responseModel->getLastResponses();
         $lastSent = $sentModel->getLastSent();
@@ -52,6 +53,7 @@ class DashboardController extends Controller
             "totalQueueToday" => $sentsToday["quantity"] + $numberInQueue,
 
             "lastErrors" => $logsModel->getRecentErrors(24),
+            "exec" => $this->isExecuting(),
         ]);
     }
 
@@ -61,6 +63,7 @@ class DashboardController extends Controller
 
         return view("sent", [
             "lastSent" => $lastSent,
+            "exec" => $this->isExecuting(),
         ]);
     }
 
@@ -73,6 +76,7 @@ class DashboardController extends Controller
 
         return view("logs", [
             "logs" => $logs,
+            "exec" => $this->isExecuting(),
         ]);
     }
 
@@ -84,6 +88,7 @@ class DashboardController extends Controller
 
         return view("queue", [
             "queue" => $logs,
+            "exec" => $this->isExecuting(),
         ]);
     }
 
@@ -119,7 +124,45 @@ class DashboardController extends Controller
 
         return view("interaction", [
             "messages" => $messages,
-            "phone" => $phone
+            "phone" => $phone,
+            "exec" => $this->isExecuting(),
         ]);
+    }
+
+    private function isExecuting()
+    {
+
+        $isExecuting = false;
+        $execution = $this->getExecution();
+
+        if ($execution) {
+            $datetimeLastExec = $execution->datetime;
+            $timestampLastExecution = strtotime($datetimeLastExec);
+            $timestampNow = strtotime("-1 minute", strtotime(date("Y-m-d H:i:s")));
+            $timestampNow = strtotime("-2 hour", $timestampNow); // estou tendo q subtrair 2 hrs
+
+
+            if ($timestampLastExecution > $timestampNow) {
+                $isExecuting = true;
+            }
+        }
+        return $isExecuting;
+    }
+
+    private function getExecution()
+    {
+        try {
+            $f = json_decode(file_get_contents(storage_path("logs/execution.json")));
+            return $f;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function exec()
+    {
+        exec('sudo node ../run-bot.js /dev/null 2>&1 &');
+//        var_dump($out);
+
     }
 }
