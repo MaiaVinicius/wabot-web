@@ -21,6 +21,7 @@ class LogsModel extends BaseModel
         inner join wabot_log_type lt on lt.id=l.log_type_id
         where L.datetime between ? and ?
         order by l.datetime desc
+        limit 200
         ", [$dateStart, $dateEnd]);
         $res = $this->rawAsArray($res);
 
