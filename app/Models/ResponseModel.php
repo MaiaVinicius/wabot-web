@@ -17,13 +17,7 @@ class ResponseModel extends BaseModel
         $res = $this->raw("
 SELECT res.*,
        proj.label projectName,
-       (SELECT TIMESTAMPDIFF(SECOND, st.datetime, res.datetime)
-        FROM wabot_sent st
-        WHERE st.license_id = res.license_id
-          AND st.appointment_id = res.appointment_id
-          AND st.datetime < res.datetime
-        ORDER BY st.datetime
-        LIMIT 1)delayTime
+       0 delayTime
 
 FROM wabot_response res
        INNER JOIN wabot_project proj ON proj.license_id = res.license_id

@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $numberInQueue = $queueModel->getNumberInQueue();
 
-        $quantitySentInterval = 144;
+        $quantitySentInterval = 24;
 
         $sentsToday = $sentModel->getQuantitySent(24, true);
 
@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $quantitySent24hours = $sent["quantity"];
 
 
-        $lastResponses = $responseModel->getLastResponses();
+//        $lastResponses = $responseModel->getLastResponses();
         $lastSent = $sentModel->getLastSent();
 
         $peopleThatRespond = $responseModel->getPeopleThatRespond($quantitySentInterval);
@@ -98,6 +98,7 @@ class DashboardController extends Controller
 
         return view("reply", [
             "lastReplies" => $lastReplies,
+            "exec" => $this->isExecuting(),
             "formatDelay" => function ($seconds) {
                 if ($seconds <= 0) {
                     return null;
