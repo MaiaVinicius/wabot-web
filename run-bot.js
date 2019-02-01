@@ -6,24 +6,8 @@ function run() {
         cwd: '/Users/maiavinicius/go/src/github.com/MaiaVinicius/wabot'
     });
 
-
-    coffeeProcess.stdout.on('data', function (data) {
-        console.log(data);
-    });
-
-    coffeeProcess.stdout.on('data', function (data) {
-        console.log(data);
-    });
-
-    coffeeProcess.on('exit', function (code) {
-        console.log('child process exited with code ' + code.toString());
-
-    });
-
     coffeeProcess.stderr.on('data', function (data) {
         console.log('stderr: ' + data.toString());
-
-        saveExecution(data.pid);
 
         getKillOrder(function (kill) {
             if (kill) {
@@ -31,7 +15,7 @@ function run() {
                 fs.unlink('storage/logs/kill.json', function () {
                     console.log("FORCE_KILL");
 
-                    coffeeProcess.kill(null,'SIGINT');
+                    coffeeProcess.kill(null, 'SIGINT');
                 });
 
             }
@@ -74,7 +58,14 @@ var cron = require('node-cron');
 const fs = require("fs");
 
 
+saveExecution()
+
+setInterval(function () {
+    saveExecution()
+}, 25000);
+
 run();
+
 cron.schedule('*/5 * * * *', () => {
     run()
     // console.log("run")

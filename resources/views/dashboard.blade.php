@@ -45,7 +45,7 @@
                             <i class="material-icons">error</i>
                         </div>
                         <p class="card-category">Erros recentes</p>
-                        <h3 class="card-title">{{$lastErrors ? "{$lastErrors} erro".($lastErrors>1 ? "s": "") : "0 erro"}}</h3>
+                        <h3 class="card-title">{{$lastErrors ? "{$lastErrors} erro".($lastErrors>1 ? "s": "") : "Nenhum"}}</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
