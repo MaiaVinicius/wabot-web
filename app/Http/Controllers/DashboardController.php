@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $numberInQueue = $queueModel->getNumberInQueue();
 
-        $quantitySentInterval = 24;
+        $quantitySentInterval = 48;
 
         $sentsToday = $sentModel->getQuantitySent(24, true);
 

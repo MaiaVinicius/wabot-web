@@ -66,7 +66,7 @@ setInterval(function () {
 
 run();
 
-cron.schedule('*/5 * * * *', () => {
+cron.schedule('*/12 * * * *', () => {
     run()
     // console.log("run")
 });
