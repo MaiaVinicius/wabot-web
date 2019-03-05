@@ -1,5 +1,7 @@
 # Wabot Web
-Interface para exibir os dados de envio e recebimento de mensagens
+Interface para exibir os dados de envio e recebimento de mensagens. 
+
+O disparo e recebimento de mensagens é feito a partir do projeto https://github.com/MaiaVinicius/wabot.
 
 ## Requisitos
 - PHP 5.6 +
